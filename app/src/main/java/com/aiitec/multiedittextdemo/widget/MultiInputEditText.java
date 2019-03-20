@@ -10,6 +10,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -35,6 +36,8 @@ public class MultiInputEditText extends LinearLayout {
     private List<SecurityEditText> editTextList = new ArrayList<>();
     private int listSize;
     private StringBuilder sb = new StringBuilder();
+
+    public static final String TAG = "ailibin";
 
     private float editTextWidth;
     private float minHeight;
@@ -106,15 +109,18 @@ public class MultiInputEditText extends LinearLayout {
 
 
     public MultiInputEditText(Context context) {
-        super(context);
+//        super(context);
+        this(context, null);
     }
 
     public MultiInputEditText(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
+//        super(context, attrs);
+        this(context, attrs, 0);
     }
 
     public MultiInputEditText(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+//        super(context, attrs, defStyleAttr);
+        this(context, attrs, defStyleAttr, 0);
     }
 
     public MultiInputEditText(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -184,6 +190,9 @@ public class MultiInputEditText extends LinearLayout {
 //        invalidate();
 //        postInvalidate();
 //        requestLayout();
+        int height = getMeasuredHeight();
+        int width = getMeasuredWidth();
+        Log.e(TAG, "width: " + width + "  height: " + height);
         typedArray.recycle();
 
     }
@@ -191,6 +200,15 @@ public class MultiInputEditText extends LinearLayout {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        Log.e(TAG, "widthMeasureSpec: " + widthMeasureSpec + "  heightMeasureSpec: " + heightMeasureSpec);
+        int height = getMeasuredHeight();
+        int width = getMeasuredWidth();
+        Log.e(TAG, "width: " + width + "  height: " + height);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     private void init() {
