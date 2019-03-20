@@ -254,7 +254,6 @@ public class MultiInputEditText extends LinearLayout {
                     lastEditText.getText().clear();
                     lastEditText.requestFocus();
                     b = false;
-                    Log.e("ailibin", "lastEditText" + currentPosition1);
                 } else if (!b) {
                     lastEditText.clearFocus();
                     lastEditText.setFocusable(false);
@@ -264,11 +263,9 @@ public class MultiInputEditText extends LinearLayout {
                     currentPosition1--;
                     currentPosition2--;
                     b = true;
-                    Log.e("ailibin", "last2EditText" + currentPosition1);
                 } else {
                     lastEditText.getText().clear();
                     lastEditText.requestFocus();
-                    Log.e("ailibin", "last2EditText$$$" + currentPosition1);
                     b = false;
                 }
             } else {
@@ -284,7 +281,6 @@ public class MultiInputEditText extends LinearLayout {
                         frontEditText.requestFocus();
                         currentPosition1--;
                         currentPosition2--;
-                        Log.e("ailibin", "currentPosition1***" + currentPosition1);
                     }
                 }
             }
