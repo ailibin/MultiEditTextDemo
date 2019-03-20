@@ -8,7 +8,9 @@ import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputConnectionWrapper;
 
 /**
- * Created by ailibibn on 2018/11/21.
+ *
+ * @author ailibibn
+ * @date 2018/11/21
  * 解决删除键在部分手机上无效bug
  */
 
