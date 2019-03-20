@@ -21,6 +21,8 @@
             app:editText_inputType="number"
             app:editText_gravity="center"
             app:single_editText_minHeight="32dp"
+            app:editText_color="#333333"
+            app:editText_size="14sp"
             app:multiEditText_margin="38dp"
 
     />
