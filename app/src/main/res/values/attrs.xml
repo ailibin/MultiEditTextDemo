@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="MultiInputEditText">
+
+        <!--editText数量-->
+        <attr name="editText_number" format="integer|reference"/>
+        <attr name="single_editText_width" format="dimension|reference"/>
+        <attr name="single_editText_minHeight" format="dimension|reference"/>
+        <attr name="editText_size" format="dimension|reference"/>
+        <attr name="editText_color" format="color|reference"/>
+        <attr name="multiEditText_margin" format="dimension|reference"/>
+
+        <attr name="editText_inputType">
+            <enum name="number" value="0x00000000"/>
+            <enum name="text" value="0x00000001"/>
+        </attr>
+
+        <attr name="editText_gravity">
+            <enum name="center" value="0x00000000"/>
+            <enum name="left" value="0x00000001"/>
+            <enum name="right" value="0x00000002"/>
+        </attr>
+
+
+    </declare-styleable>
+
+
+</resources>
