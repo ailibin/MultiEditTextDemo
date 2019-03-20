@@ -61,7 +61,7 @@ public class MultiInputEditText extends LinearLayout {
                 return;
             }
 
-            Log.e(TAG, "onTextChanged--currentPosition: " + currentPosition1);
+//            Log.e(TAG, "onTextChanged--currentPosition: " + currentPosition1);
             SecurityEditText editText = editTextList.get(currentPosition1);
             sb.append(editText.getText().toString().trim());
             if (currentPosition1 < listSize - 1) {
@@ -74,13 +74,10 @@ public class MultiInputEditText extends LinearLayout {
                 if (editText.isFocusable()) {
                     if (onInputCompleteLister != null) {
                         onInputCompleteLister.onComplete(sb.toString());
-                        currentPosition1 = listSize - 1;
-                        editText.setFocusable(true);
-                        editText.setFocusableInTouchMode(true);
                     }
                 }
             }
-            Log.e(TAG, "onTextChanged--currentPosition123: " + currentPosition1);
+//            Log.e(TAG, "onTextChanged--currentPosition--after: " + currentPosition1);
 
         }
 
@@ -90,23 +87,20 @@ public class MultiInputEditText extends LinearLayout {
             if (editable.length() != 1) {
                 return;
             }
-            Log.e(TAG, "afterTextChanged--currentPosition: " + currentPosition2);
+//            Log.e(TAG, "afterTextChanged--currentPosition: " + currentPosition2);
             EditText editText = editTextList.get(currentPosition2);
             if (editText.isFocused()) {
-                //上一个失去焦点
-                editText.setFocusable(false);
-                //下一个获得焦点
                 if (currentPosition2 < listSize - 1) {
+                    //上一个失去焦点, 下一个获得焦点
+                    editText.setFocusable(false);
                     EditText editText1 = editTextList.get(currentPosition2 + 1);
                     editText1.requestFocus();
                     currentPosition2++;
                 } else {
                     //to do something
-                    currentPosition2 = listSize - 1;
-                    editText.requestFocus();
                 }
             }
-            Log.e(TAG, "afterTextChanged--currentPosition456: " + currentPosition2);
+//            Log.e(TAG, "afterTextChanged--currentPosition--after: " + currentPosition2);
 
         }
     };
@@ -252,7 +246,6 @@ public class MultiInputEditText extends LinearLayout {
     public boolean onKeyDownInView(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_DEL) {
             Log.e(TAG, "onKeyDown");
-            Toast.makeText(getContext(), "按下了删除键", Toast.LENGTH_SHORT).show();
             //按下了删除按钮,最后一个按下回删键listSize必须要大于2以上
             SecurityEditText lastEditText = editTextList.get(listSize - 1);
             SecurityEditText last2EditText = editTextList.get(listSize - 2);
