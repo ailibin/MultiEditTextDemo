@@ -31,7 +31,6 @@ import java.util.List;
 public class MultiInputEditText extends LinearLayout {
 
 
-    private Paint mTextPaint;
     private int etNumber;
     private List<SecurityEditText> editTextList = new ArrayList<>();
     private int listSize;
@@ -46,6 +45,7 @@ public class MultiInputEditText extends LinearLayout {
     private int textColor;
     private int inputType;
     private int gravity;
+    private int currentPosition = 0;
 
     private TextWatcher mTextWatcher = new TextWatcher() {
         @Override
@@ -60,7 +60,7 @@ public class MultiInputEditText extends LinearLayout {
             }
 
             //只有一个字符
-            for (int k = 0; i < listSize; i++) {
+            for (int k = currentPosition; k < listSize; k++) {
                 SecurityEditText editText = editTextList.get(k);
                 sb.append(editText.getText().toString().trim());
                 if (editText.isFocusable()) {
@@ -70,6 +70,7 @@ public class MultiInputEditText extends LinearLayout {
                         editText1.setFocusableInTouchMode(true);
                     }
                 }
+
                 if (k == listSize - 1) {
                     //回调处理
                     if (editText.isFocusable()) {
@@ -78,6 +79,8 @@ public class MultiInputEditText extends LinearLayout {
                         }
                     }
                 }
+                currentPosition = k;
+                return;
             }
 
 
@@ -89,7 +92,7 @@ public class MultiInputEditText extends LinearLayout {
             if (editable.length() != 1) {
                 return;
             }
-            for (int k = 0; k < listSize; k++) {
+            for (int k = currentPosition; k < listSize; k++) {
                 SecurityEditText editText = editTextList.get(k);
                 if (editText.isFocused()) {
                     //上一个失去焦点
@@ -103,23 +106,22 @@ public class MultiInputEditText extends LinearLayout {
                 if (k == listSize - 1) {
                     //to do something
                 }
+                currentPosition = k;
+                return;
             }
         }
     };
 
 
     public MultiInputEditText(Context context) {
-//        super(context);
         this(context, null);
     }
 
     public MultiInputEditText(Context context, @Nullable AttributeSet attrs) {
-//        super(context, attrs);
         this(context, attrs, 0);
     }
 
     public MultiInputEditText(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-//        super(context, attrs, defStyleAttr);
         this(context, attrs, defStyleAttr, 0);
     }
 
@@ -135,12 +137,6 @@ public class MultiInputEditText extends LinearLayout {
         gravity = typedArray.getInt(R.styleable.MultiInputEditText_editText_gravity, 0);
         textSize = typedArray.getDimension(R.styleable.MultiInputEditText_editText_size, 13f);
         textColor = typedArray.getColor(R.styleable.MultiInputEditText_editText_color, Color.GRAY);
-
-//        LinearLayout.LayoutParams vLp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//        vLp.gravity = Gravity.CENTER_VERTICAL;
-//        vLp.setMargins((int) margin, 0, (int) margin, 0);
-//        setLayoutParams(vLp);
-//        setOrientation(LinearLayout.HORIZONTAL);
 
         editTextList.clear();
         SecurityEditText editText;
@@ -187,12 +183,6 @@ public class MultiInputEditText extends LinearLayout {
 
         listSize = editTextList.size();
         init();
-//        invalidate();
-//        postInvalidate();
-//        requestLayout();
-        int height = getMeasuredHeight();
-        int width = getMeasuredWidth();
-        Log.e(TAG, "width: " + width + "  height: " + height);
         typedArray.recycle();
 
     }
@@ -204,10 +194,34 @@ public class MultiInputEditText extends LinearLayout {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        Log.e(TAG, "widthMeasureSpec: " + widthMeasureSpec + "  heightMeasureSpec: " + heightMeasureSpec);
+
         int height = getMeasuredHeight();
         int width = getMeasuredWidth();
         Log.e(TAG, "width: " + width + "  height: " + height);
+
+        // get calculate mode of width and height
+        int modeWidth = MeasureSpec.getMode(widthMeasureSpec);
+        int modeHeight = MeasureSpec.getMode(heightMeasureSpec);
+
+        // get recommend width and height
+        int sizeWidth = MeasureSpec.getSize(widthMeasureSpec);
+        int sizeHeight = MeasureSpec.getSize(heightMeasureSpec);
+
+        // wrap_content
+        if (modeWidth == MeasureSpec.AT_MOST) {
+            sizeWidth = Math.min(100, sizeWidth);
+            modeWidth = MeasureSpec.EXACTLY;
+        }
+
+        // wrap_content
+        if (modeHeight == MeasureSpec.AT_MOST) {
+            sizeHeight = Math.min(dp2px(getContext(), 40), sizeHeight);
+            modeHeight = MeasureSpec.EXACTLY;
+        }
+
+        widthMeasureSpec = MeasureSpec.makeMeasureSpec(sizeWidth, modeWidth);
+        heightMeasureSpec = MeasureSpec.makeMeasureSpec(sizeHeight, modeHeight);
+
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
