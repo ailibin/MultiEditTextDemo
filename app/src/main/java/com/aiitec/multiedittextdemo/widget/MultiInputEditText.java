@@ -31,13 +31,9 @@ public class MultiInputEditText extends LinearLayout {
 
 
     private Paint mTextPaint;
-
     private int etNumber;
-
     private List<SecurityEditText> editTextList = new ArrayList<>();
-
     private int listSize;
-
     private StringBuilder sb = new StringBuilder();
 
     private float editTextWidth;
@@ -134,11 +130,11 @@ public class MultiInputEditText extends LinearLayout {
         textSize = typedArray.getDimension(R.styleable.MultiInputEditText_editText_size, 13f);
         textColor = typedArray.getColor(R.styleable.MultiInputEditText_editText_color, Color.GRAY);
 
-        LinearLayout.LayoutParams vLp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        vLp.gravity = Gravity.CENTER_VERTICAL;
-        vLp.setMargins((int) margin, 0, (int) margin, 0);
-        setLayoutParams(vLp);
-        setOrientation(LinearLayout.HORIZONTAL);
+//        LinearLayout.LayoutParams vLp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        vLp.gravity = Gravity.CENTER_VERTICAL;
+//        vLp.setMargins((int) margin, 0, (int) margin, 0);
+//        setLayoutParams(vLp);
+//        setOrientation(LinearLayout.HORIZONTAL);
 
         editTextList.clear();
         SecurityEditText editText;

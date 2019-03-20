@@ -11,6 +11,8 @@
             android:id="@+id/test_multiInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="38dp"
+            android:layout_marginRight="38dp"
             android:orientation="horizontal"
             app:single_editText_width="40dp"
             app:editText_number="6"
