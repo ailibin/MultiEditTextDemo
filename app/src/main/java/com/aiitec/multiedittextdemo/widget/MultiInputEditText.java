@@ -187,6 +187,14 @@ public class MultiInputEditText extends LinearLayout {
         super.onDraw(canvas);
     }
 
+    /**
+     * getMeasuredHeight()返回的是原始测量高度，与屏幕无关，
+     * getHeight()返回的是在屏幕上显示的高度。实际上在当屏幕可以包裹内容的时候，他们的值是相等的，
+     * 只有当view超出屏幕后，才能看出他们的区别。当超出屏幕后，getMeasuredHeight()等于getHeight()加上屏幕之外没有显示的高度。
+     *
+     * @param widthMeasureSpec
+     * @param heightMeasureSpec
+     */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 
@@ -198,9 +206,11 @@ public class MultiInputEditText extends LinearLayout {
         int modeWidth = MeasureSpec.getMode(widthMeasureSpec);
         int modeHeight = MeasureSpec.getMode(heightMeasureSpec);
 
-        // get recommend width and height
+        // get recommend width and height 表示当前控件的最大宽度和高度
         int sizeWidth = MeasureSpec.getSize(widthMeasureSpec);
         int sizeHeight = MeasureSpec.getSize(heightMeasureSpec);
+
+        Log.e(TAG, "sizeWidth: " + sizeWidth + "  sizeHeight: " + sizeHeight);
 
         // wrap_content
         if (modeWidth == MeasureSpec.AT_MOST) {
@@ -208,16 +218,18 @@ public class MultiInputEditText extends LinearLayout {
             modeWidth = MeasureSpec.EXACTLY;
         }
 
-        // wrap_content
+        // wrap_content,是多少就是多少，不要具体数值
         if (modeHeight == MeasureSpec.AT_MOST) {
             sizeHeight = Math.min(dp2px(getContext(), 40), sizeHeight);
-            modeHeight = MeasureSpec.EXACTLY;
+//            modeHeight = MeasureSpec.EXACTLY;
+            modeHeight = MeasureSpec.UNSPECIFIED;
         }
 
         widthMeasureSpec = MeasureSpec.makeMeasureSpec(sizeWidth, modeWidth);
         heightMeasureSpec = MeasureSpec.makeMeasureSpec(sizeHeight, modeHeight);
 
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
     }
 
     private void init() {
