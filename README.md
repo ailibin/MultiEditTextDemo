@@ -2,6 +2,8 @@
 this is a self define widget project!
 
 How to use?
+
+
 1.在布局文件中引用该控件的全类名，设置相关的自定义的属性值，demo中有相关设置，可以参考demo。
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190321120337571.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjUxNjEwOQ==,size_16,color_FFFFFF,t_70)
 2.在需要用到的activity中,查找到该控件,然后设置输入完成的接口回调，拿到输入的结果，进行相关处理。
