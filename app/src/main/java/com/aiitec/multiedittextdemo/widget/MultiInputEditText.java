@@ -62,7 +62,6 @@ public class MultiInputEditText extends LinearLayout {
             }
 
             SecurityEditText editText = editTextList.get(currentPosition1);
-            sb.append(editText.getText().toString().trim());
             if (currentPosition1 < listSize - 1) {
                 SecurityEditText editText1 = editTextList.get(currentPosition1 + 1);
                 editText1.setFocusable(true);
@@ -72,6 +71,11 @@ public class MultiInputEditText extends LinearLayout {
                 //回调处理
                 if (editText.isFocusable()) {
                     if (onInputCompleteLister != null) {
+                        for (int k = 0; k < listSize; k++) {
+                            //重新遍历拼接
+                            SecurityEditText et = editTextList.get(k);
+                            sb.append(et.getText().toString().trim());
+                        }
                         onInputCompleteLister.onComplete(sb.toString());
                     }
                 }
