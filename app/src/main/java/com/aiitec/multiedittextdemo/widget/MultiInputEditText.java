@@ -71,6 +71,8 @@ public class MultiInputEditText extends LinearLayout {
                 //回调处理
                 if (editText.isFocusable()) {
                     if (onInputCompleteLister != null) {
+                        //清空原来的
+                        sb.delete(0, sb.length());
                         for (int k = 0; k < listSize; k++) {
                             //重新遍历拼接
                             SecurityEditText et = editTextList.get(k);
