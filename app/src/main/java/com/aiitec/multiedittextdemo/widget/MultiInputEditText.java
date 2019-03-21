@@ -32,12 +32,12 @@ import java.util.List;
  */
 public class MultiInputEditText extends LinearLayout {
 
+    public static final String TAG = "ailibin";
     private int etNumber;
     private List<SecurityEditText> editTextList = new ArrayList<>();
     private int listSize;
     private StringBuilder sb = new StringBuilder();
 
-    public static final String TAG = "ailibin";
 
     private float editTextWidth;
     private float minHeight;
@@ -61,7 +61,6 @@ public class MultiInputEditText extends LinearLayout {
                 return;
             }
 
-//            Log.e(TAG, "onTextChanged--currentPosition: " + currentPosition1);
             SecurityEditText editText = editTextList.get(currentPosition1);
             sb.append(editText.getText().toString().trim());
             if (currentPosition1 < listSize - 1) {
@@ -77,7 +76,6 @@ public class MultiInputEditText extends LinearLayout {
                     }
                 }
             }
-//            Log.e(TAG, "onTextChanged--currentPosition--after: " + currentPosition1);
 
         }
 
@@ -87,7 +85,6 @@ public class MultiInputEditText extends LinearLayout {
             if (editable.length() != 1) {
                 return;
             }
-//            Log.e(TAG, "afterTextChanged--currentPosition: " + currentPosition2);
             EditText editText = editTextList.get(currentPosition2);
             if (editText.isFocused()) {
                 if (currentPosition2 < listSize - 1) {
@@ -100,7 +97,6 @@ public class MultiInputEditText extends LinearLayout {
                     //to do something
                 }
             }
-//            Log.e(TAG, "afterTextChanged--currentPosition--after: " + currentPosition2);
 
         }
     };
